@@ -5,7 +5,6 @@
 #menu {
     width: 60px;
     height: 60px;
-    border: 3px solid var(--firstBlack);
     border-radius: 999px;
     padding: 10px;
     position: fixed;
@@ -27,11 +26,13 @@
     width: 0px;
     display: flex;
     position: fixed;
-    left: 90px;
+    left: 82px;
     top: 30px;
+    border: 3px solid var(--firstBlack);
     list-style: none;
     box-shadow: 0px 0px 4px var(--firstBlack);
     z-index: 1;
+    border-radius: 0px 20px 20px 0px;
 }
 
 #links ul {

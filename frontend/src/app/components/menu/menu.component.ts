@@ -1,4 +1,5 @@
 import { Component, OnInit } from '@angular/core';
+import { ThemeService } from 'src/app/services/theme.service';
 
 @Component({
   selector: 'app-menu',
@@ -8,7 +9,12 @@ import { Component, OnInit } from '@angular/core';
 export class MenuComponent implements OnInit {
 
   public menuDisplay: boolean = false
-  constructor() { }
+  public theme: string
+  constructor(
+    public themeService: ThemeService
+  ) {
+    this.theme = this.themeService.theme
+   }
 
   ngOnInit(): void {
   }
@@ -26,7 +32,7 @@ export class MenuComponent implements OnInit {
           clearInterval(interval);
         }
       }, 10)
-      links.style.paddingLeft = "10px"
+      links.style.paddingLeft = "15px"
       image.style.transform = 'rotateZ(90deg)'
       this.menuDisplay = true
     } else {

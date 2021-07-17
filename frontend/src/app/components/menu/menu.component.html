@@ -1,5 +1,12 @@
-<div id='menu' (click)="displayMenu()">
-    <img src="assets/img/menuLight.svg" alt="">
+<div id='menu' (click)="displayMenu()"
+  [ngStyle]="{
+      'border': this.theme === 'black' ? '3px solid var(--firstWhite)' : '3px solid var(--firstBlack)'
+      'border': this.theme === 'black' ? '3px solid var(--firstWhite)' : '3px solid var(--firstBlack)'
+  }">
+    <img 
+    src="{{this.theme === 'black' ? ''}}" 
+    alt=""
+    >
 </div>
 <ul id='links'>
     <li>
