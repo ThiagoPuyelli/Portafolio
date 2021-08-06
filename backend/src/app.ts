@@ -10,6 +10,7 @@ import authLogin from './passport/auth-login'
 // Routes
 import authRoutes from './routes/auth.routes'
 import projectRoutes from './routes/project.routes'
+import skillRoutes from './routes/skill.routes'
 
 export class App {
   public app: Application
@@ -65,5 +66,6 @@ export class App {
   setRoutes () {
     this.app.use('/auth/', authRoutes)
     this.app.use('/project/', projectRoutes)
+    this.app.use('/skill/', skillRoutes)
   }
 }
