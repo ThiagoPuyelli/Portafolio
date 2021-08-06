@@ -1,9 +1,14 @@
+@font-face {
+  src: url('../public/fonts/Righteous-Regular.ttf');
+  font-family: righteous
+}
+
 html,
 body {
   padding: 0;
   margin: 0;
-  font-family: -apple-system, BlinkMacSystemFont, Segoe UI, Roboto, Oxygen,
-    Ubuntu, Cantarell, Fira Sans, Droid Sans, Helvetica Neue, sans-serif;
+  font-family: Ubuntu, Fira Sans, -apple-system, BlinkMacSystemFont, Segoe UI, Roboto, Oxygen,
+    Cantarell, Droid Sans, Helvetica Neue, sans-serif;
 }
 
 a {
@@ -16,5 +21,14 @@ a {
 }
 
 :root {
-  --green: #04471C;
+  --firstGreen: #23CE6B;
+  --firstBlack: #272d2d;
+  --firstWhite: #F6F8FF;
+  --firstPurple: #A846A0; 
+  --firstGray: #50514F;
+  --secondaryBlack: #020202;
+  --green1: #16DB65;  
+  --green2: #058C42;  
+  --green3: #04471C;  
+  --green4: #0D2818; 
 }

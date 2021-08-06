@@ -1,6 +1,6 @@
 import { useFela } from 'react-fela'
 import Image from 'next/image'
-import menuDark from '../public/menuLight.svg'
+import menuDark from '../public/img/menuLight.svg'
 import Link from 'next/link'
 
 export default function Menu () {
@@ -36,7 +36,7 @@ export default function Menu () {
     },
     '> .links .link': {
       display: 'block',
-      border: '2px solid var(--green)',
+      border: '2px solid var(--green3)',
       borderTop: 'none',
       height: '10px',
       marginTop: '15px',
@@ -44,7 +44,12 @@ export default function Menu () {
       paddingRight: '5px'
     },
     '> .links .link .linkButton': {
-      marginTop: '-17px'
+      marginTop: '-17px',
+      transition: '300ms all'
+    },
+    '> .links .link .linkButton:hover': {
+      transform: 'scale(1.2, 1.2)',
+      color: 'var(--green2)'
     },
     '> .imgStyle': {
         width: '70px',
@@ -63,10 +68,10 @@ export default function Menu () {
         transform,
         '> menuImg': {
           width: '100%'
-        },
-        ':hover': {
-          transform: 'scale(1.2, 1.2)'
         }
+    },
+    '> .imgStyle:hover': {
+      transform: 'scale(1.2, 1.2)'
     }
   })
 
@@ -74,15 +79,20 @@ export default function Menu () {
     const links: HTMLElement|null = document.querySelector('.links')
     const menuImg: HTMLElement|null = document.querySelector('.imgStyle')
     if (width === '0px' && padding === '0px' && transform === 'rotateZ(0deg)') {
-      width = '250px',
-      padding = '10px',
+      if (links) links.style.width = '250px'
+      if (links) links.style.padding = '10px'
+      if (menuImg) menuImg.style.transform = 'rotateZ(90deg)'
+      width = '250px'
+      padding = '10px'
       transform = 'rotateZ(90deg)'
     } else if (width === '250px' && padding === '10px' && transform === 'rotateZ(90deg)') {
-      width = '0px',
-      padding = '0px',
+      if (links) links.style.width = '0px'
+      if (links) links.style.padding = '0px'
+      if (menuImg) menuImg.style.transform = 'rotateZ(0deg)'
+      width = '0px'
+      padding = '0px'
       transform = 'rotateZ(0deg)'
     }
-    console.log(width)
   }
 
   return (
