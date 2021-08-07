@@ -1,8 +1,11 @@
 import { useFela } from 'react-fela'
 import Image from 'next/image'
 import avatar from '../public/img/avatar.jpeg'
+import axios from 'axios'
+import { env } from '../next.config'
+import { SkillsInterface, SkillInterface } from '../interfaces/SkillsInterface'
 
-export default function Home() {
+export default function Home({ skills }: SkillsInterface) {
   const { css } = useFela()
   const contentStyle = css({
     display: 'flex',
@@ -43,8 +46,43 @@ export default function Home() {
           textDecoration: 'underline'
         }
       },
+    },
+    '> .skills': {
+      width: '100%',
+      padding: '70px',
+      '> .skill': {
+        width: '280px',
+        '> .skillBox': {
+          height: '500px',
+          '> .imgSkill *': {
+            width: '80px',
+            height: '80px',
+            position: 'relative'
+          }
+        }
+      }
     }
   })
+
+  let skillsHTML: Array<any> = []
+  
+  if (skills.length === 0) {
+    console.log('Error to find skills')
+  } else {
+    skillsHTML = skills.map((skill: SkillInterface) => {
+      return (
+        <div className='skill' key={skill.skill}>
+          <div className='skillBox' style={{border: '4px solid ' + skill.color}}>
+            <div className='imgSkill'>
+              <Image src={skill.image} layout='fill' alt={'Logo de ' + skill.skill} />
+            </div>
+            <h1>{skill.skill}</h1>
+            <span>{skill.porcent}</span>
+          </div>
+        </div>
+      )
+    })
+  }
   
   return (
     <div className={contentStyle}>
@@ -63,6 +101,37 @@ export default function Home() {
           </p>
         </div>
       </div>
+      <div className="skills">
+        {skillsHTML}
+      </div>
     </div>
   )
+}
+
+export async function getStaticProps () {
+  try {
+    if (env.URI) {
+      const skills = await axios.get(env.URI + '/skill')
+      if (!skills) {
+        console.log('Error to find skills in sevrer')
+      }
+      return {
+        props: { skills: skills.data.message.skills }
+      }
+    } else {
+      console.log('Error to find skills in sevrer')
+      return { 
+        props: {
+          skills: []
+        }
+      }
+    }
+  } catch (err) {
+    console.log(err)
+    return { 
+      props: {
+        skills: []
+      }
+    }
+  }
 }
