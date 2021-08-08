@@ -1,9 +1,8 @@
 import { Dispatch } from "redux"
 
 const initialState = {
-  theme: 'var(--white)',
-  marginButton: '-45px',
-  themeText: 'var(--black)'
+  theme: 'Light',
+  color: 'black'
 }
 
 const BLACK_THEME = 'BLACK_THEME'
@@ -11,22 +10,26 @@ const WHITE_THEME = 'WHITE_THEME'
 
 export const themeReducer = (state = initialState, { type }: any) => {
   if (type === BLACK_THEME) {
-    return { theme: 'var(--black)', marginButton: '0px', themeText: 'var(--white)' }
+    return { ...state, theme: 'Light', color: 'black'}
   } else if (type === WHITE_THEME) {
-    return { theme: 'var(--white)', marginButton: '-45px', themeText: 'var(--black)' }
+    return { ...state, theme: 'Dark', color: 'white' }
   } else {
-    return state
+    return initialState
   }
 }
 
 export const themeAction = (theme: string) => (dispatch: Dispatch) => {
-  if (theme === 'var(--white)') {
+  if (theme === 'Light') {
     dispatch({
       type: BLACK_THEME
     })
-  } else {
+  } else if (theme === 'Dark'){
     dispatch({
       type: WHITE_THEME
+    })
+  } else {
+    dispatch({
+      type: BLACK_THEME
     })
   }
 }

@@ -3,6 +3,8 @@ import type { AppProps } from 'next/app'
 import { RendererProvider } from 'react-fela'
 import { createRenderer } from 'fela'
 import Menu from '../components/Menu'
+import Footer from '../components/Footer'
+import ThemeButton from '../components/ThemeButton'
 
 // Redux
 import { PersistGate } from 'redux-persist/integration/react'
@@ -18,7 +20,9 @@ function MyApp({ Component, pageProps }: AppProps) {
       <PersistGate persistor={persist}>
         <RendererProvider renderer={renderer}>
           <Menu></Menu>
+          <ThemeButton></ThemeButton>
           <Component {...pageProps} />
+          <Footer></Footer>
         </RendererProvider>
       </PersistGate>
     </Provider>

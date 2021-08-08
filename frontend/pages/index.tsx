@@ -4,8 +4,11 @@ import avatar from '../public/img/avatar.jpeg'
 import axios from 'axios'
 import { env } from '../next.config'
 import { SkillsInterface, SkillInterface } from '../interfaces/SkillsInterface'
+import StoreInterface from '../interfaces/StoreInterface'
+import { useSelector } from 'react-redux'
 
 export default function Home({ skills }: SkillsInterface) {
+  const theme = useSelector((state: StoreInterface) => state.theme.theme)
   const { css } = useFela()
   const contentStyle = css({
     display: 'flex',
@@ -14,6 +17,7 @@ export default function Home({ skills }: SkillsInterface) {
     width: '100%',
     paddingTop: '100px',
     padding: '30px',
+    background: theme === 'Dark' ? 'var(--firstBlack)' : 'var(--firstWhite)',
     '> .about': {
       display: 'flex',
       flexFlow: 'row wrap',
@@ -27,7 +31,7 @@ export default function Home({ skills }: SkillsInterface) {
       },
       '> .img': {
         width: '300px',
-        border: '6px solid black',
+        border: '10px solid black',
         borderRadius: '30px',
         paddingBottom: '-10px',
         overflow: 'hidden',
@@ -48,16 +52,30 @@ export default function Home({ skills }: SkillsInterface) {
       },
     },
     '> .skills': {
+      display: 'flex',
+      flexFlow: 'row wrap',
+      justifyContent: 'space-evenly',
       width: '100%',
       padding: '70px',
       '> .skill': {
-        width: '280px',
+        width: '320px',
+        margin: '20px',
         '> .skillBox': {
-          height: '500px',
+          display: 'flex',
+          flexFlow: 'row wrap',
+          alignItems: 'center',
+          position: 'relative',
+          borderRadius: '20px',
+          '> *': {
+            margin: '10px'
+          },
+          '> .imgSkill': {
+            position: 'relative'
+          },
           '> .imgSkill *': {
             width: '80px',
             height: '80px',
-            position: 'relative'
+            position: 'relative !important'
           }
         }
       }
@@ -72,12 +90,40 @@ export default function Home({ skills }: SkillsInterface) {
     skillsHTML = skills.map((skill: SkillInterface) => {
       return (
         <div className='skill' key={skill.skill}>
-          <div className='skillBox' style={{border: '4px solid ' + skill.color}}>
+          <div className='skillBox' style={
+            {
+              border: '6px solid ' + skill.color,
+              boxShadow: '0px 0px 4px ' + skill.color
+            }
+            }>
             <div className='imgSkill'>
               <Image src={skill.image} layout='fill' alt={'Logo de ' + skill.skill} />
             </div>
             <h1>{skill.skill}</h1>
-            <span>{skill.porcent}</span>
+          </div>
+          <div className="progress" style={
+            {
+              background: '#ccc',
+              height: '15px',
+              width: '100%',
+              borderRadius: '20px',
+              marginTop: '10px',
+              overflow: 'hidden',
+              boxShadow: '0px 0px 4px ' + skill.color,
+              border: '1px solid ' + skill.color
+            }
+          }>
+            <div className="progressBar" style={
+              {
+                width: skill.porcent + '%',
+                backgroundColor: skill.color,
+                height: '100%',
+                fontSize: '15px',
+                color: skill.color
+              }
+            }>
+            .
+            </div>
           </div>
         </div>
       )

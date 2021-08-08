@@ -23,8 +23,8 @@ export default function Menu () {
       alignItems: 'center',
       justifyContent: 'space-around',
       position: 'fixed',
+      background: 'white',
       padding,
-      boxShadow: '0px 0px 5px #ccc !important',
       border: '1px solid #ccc',
       zIndex: '2 !important',
       left: '80px',
@@ -108,12 +108,12 @@ export default function Menu () {
         </li>
         <li className="link">
           <div className="linkButton">
-            <Link href='/contact'>Contact</Link>
+            <Link href='/contact'>Contacto</Link>
           </div>
         </li>
         <li className="link">
           <div className="linkButton">
-            <Link href='/projects'>Projects</Link>
+            <Link href='/projects'>Proyectos</Link>
           </div>
         </li>
       </ul>
