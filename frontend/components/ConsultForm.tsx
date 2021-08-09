@@ -44,6 +44,7 @@ export default function ContactForm () {
     flexFlow: 'column wrap',
     alignItems: 'center',
     marginBottom: '30px',
+    boxShadow: 'none !important',
     '> label, input, textarea': {
       marginTop: '20px'
     },
