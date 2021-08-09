@@ -11,6 +11,7 @@ import authLogin from './passport/auth-login'
 import authRoutes from './routes/auth.routes'
 import projectRoutes from './routes/project.routes'
 import skillRoutes from './routes/skill.routes'
+import mailRoutes from './routes/mail.routes'
 
 export class App {
   public app: Application
@@ -67,5 +68,6 @@ export class App {
     this.app.use('/auth/', authRoutes)
     this.app.use('/project/', projectRoutes)
     this.app.use('/skill/', skillRoutes)
+    this.app.use('/mail/', mailRoutes)
   }
 }
