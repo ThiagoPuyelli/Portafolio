@@ -3,18 +3,21 @@ import defineImage from "../utils/defineImage"
 import Image from "next/image"
 import { useSelector } from "react-redux"
 import StoreInterface from "../interfaces/StoreInterface"
-import themeDefine from "../utils/themeDefine"
 import ContactForm from "../components/ConsultForm"
 import Link from "next/link"
+import defineTheme from "../utils/defineTheme"
 
 export default function Contact () {
   const theme = useSelector((state: StoreInterface) => state.theme.theme)
+  const color = useSelector((state: StoreInterface) => state.theme.color)
   const { css } = useFela()
   const contactStyle = css({
     display: 'flex',
     flexFlow: 'column wrap',
     alignItems: 'center',
     paddingTop: '50px',
+    background: defineTheme(theme, 'var(--firstWhite)', 'var(--firstBlack)'),
+    color,
     '> .socialLinks': {
       display: 'flex',
       flexFlow: 'row wrap',

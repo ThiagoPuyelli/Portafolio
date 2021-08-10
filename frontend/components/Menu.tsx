@@ -87,7 +87,7 @@ export default function Menu () {
     const links: HTMLElement|null = document.querySelector('.links')
     const menuImg: HTMLElement|null = document.querySelector('.imgStyle')
     if (width === '0px' && padding === '0px' && transform === 'rotateZ(0deg)') {
-      if (links) links.style.width = '250px'
+      if (links) links.style.width = '270px'
       if (links) links.style.padding = '10px'
       if (menuImg) menuImg.style.transform = 'rotateZ(90deg)'
       width = '250px'

@@ -2,7 +2,7 @@ import { useForm } from "react-hook-form"
 import { useFela } from "react-fela"
 import { useSelector } from "react-redux"
 import React from "react"
-import themeDefine from "../utils/themeDefine"
+import defineTheme from "../utils/defineTheme"
 import { yupResolver } from '@hookform/resolvers/yup'
 import * as yup from 'yup'
 import StoreInterface from "../interfaces/StoreInterface"
@@ -53,8 +53,8 @@ export default function ContactForm () {
       width: '300px',
       padding: '10px',
       borderRadius: '10px',
-      boxShadow: '0px 0px 4px ' + themeDefine(theme, '#ccc', 'black'),
-      border: '1px solid ' + themeDefine(theme, '#ccc', 'black')
+      boxShadow: '0px 0px 4px ' + defineTheme(theme, '#ccc', 'black'),
+      border: '1px solid ' + defineTheme(theme, '#ccc', 'black')
     },
     '> textarea': {
       height: '200px'
