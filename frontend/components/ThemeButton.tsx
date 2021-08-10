@@ -27,6 +27,7 @@ export default function ThemeButton () {
       right: '20px',
       border: 'none',
       background: 'transparent',
+      zIndex: 2
     }}>{theme} theme</button>
   )
 }

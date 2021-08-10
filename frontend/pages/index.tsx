@@ -6,18 +6,22 @@ import { env } from '../next.config'
 import { SkillsInterface, SkillInterface } from '../interfaces/SkillsInterface'
 import StoreInterface from '../interfaces/StoreInterface'
 import { useSelector } from 'react-redux'
+import defineTheme from '../utils/defineTheme'
 
 export default function Home({ skills }: SkillsInterface) {
   const theme = useSelector((state: StoreInterface) => state.theme.theme)
+  const color = useSelector((state: StoreInterface) => state.theme.color)
   const { css } = useFela()
   const contentStyle = css({
     display: 'flex',
     flexFlow: 'column wrap',
     alignItems: 'center',
     width: '100%',
+    borderTop: 'none !important',
     paddingTop: '100px',
     padding: '30px',
-    background: theme === 'Dark' ? 'var(--firstBlack)' : 'var(--firstWhite)',
+    background: defineTheme(theme, 'var(--firstWhite)', 'var(--firstBlack)'),
+    color,
     '> .about': {
       display: 'flex',
       flexFlow: 'row wrap',

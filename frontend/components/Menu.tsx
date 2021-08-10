@@ -1,12 +1,18 @@
 import { useFela } from 'react-fela'
 import Image from 'next/image'
 import menuDark from '../public/img/menuLight.svg'
+import menuLight from '../public/img/menuDark.svg'
 import Link from 'next/link'
+import StoreInterface from '../interfaces/StoreInterface'
+import { useSelector } from 'react-redux'
+import defineTheme from '../utils/defineTheme'
 
 export default function Menu () {
   let width = '0px'
   let padding = '0px'
   let transform = 'rotateZ(0deg)'
+  const theme = useSelector((state: StoreInterface) => state.theme.theme)
+  const color = useSelector((state: StoreInterface) => state.theme.color)
     
   const { css } = useFela()
   const menuStyle = css({
@@ -23,7 +29,7 @@ export default function Menu () {
       alignItems: 'center',
       justifyContent: 'space-around',
       position: 'fixed',
-      background: 'white',
+      background: defineTheme(theme, 'var(--firstWhite)', 'var(--firstBlack)'),
       padding,
       border: '1px solid #ccc',
       zIndex: '2 !important',
@@ -36,8 +42,8 @@ export default function Menu () {
     },
     '> .links .link': {
       display: 'block',
-      border: '2px solid var(--green3)',
-      borderTop: 'none',
+      border: '2px solid ' + defineTheme(theme, 'var(--green3)', 'var(--green1)'),
+      borderTop: 'none !important',
       height: '10px',
       marginTop: '15px',
       paddingLeft: '5px',
@@ -45,11 +51,13 @@ export default function Menu () {
     },
     '> .links .link .linkButton': {
       marginTop: '-17px',
-      transition: '300ms all'
+      transition: '300ms all',
+      color,
+      fontWeight: 'bold'
     },
     '> .links .link .linkButton:hover': {
       transform: 'scale(1.2, 1.2)',
-      color: 'var(--green2)'
+      color: defineTheme(theme, 'var(--green2)', 'var(--green1)')
     },
     '> .imgStyle': {
         width: '70px',
@@ -58,13 +66,13 @@ export default function Menu () {
         left: '20px',
         top: '20px',
         borderRadius: '99px',
-        boxShadow: '0px 0px 5px #ccc',
+        boxShadow: '0px 0px 5px ' + defineTheme(theme, '#ccc', 'var(--secondaryBlack)'),
         padding: '10px',
-        border: '1px solid #ccc',
+        border: '1px solid ' + defineTheme(theme, '#ccc', 'var(--secondaryBlack)'),
         transition: '300ms all',
         cursor: 'pointer',
         zIndex: '3 !important',
-        background: 'white',
+        background: defineTheme(theme, 'var(--firstWhite)', 'var(--firstBlack)'),
         transform,
         '> menuImg': {
           width: '100%'
@@ -98,7 +106,7 @@ export default function Menu () {
   return (
     <div className={menuStyle}>
       <div className='imgStyle' onClick={menuClick}>
-        <Image className='menuImg' src={menuDark} alt='Image to menu' />
+        <Image className='menuImg' src={defineTheme(theme, menuDark, menuLight)} alt='Image to menu' />
       </div>
       <ul className="links">
         <li className="link">
