@@ -8,6 +8,7 @@ export default function Footer () {
   const theme = useSelector((state: StoreInterface) => state.theme.theme)
   const color = useSelector((state: StoreInterface) => state.theme.color)
   const footerStyle = css({
+    display: 'block !important',
     borderTop: '2px solid ' + defineTheme(theme, '#ccc', 'var(--secondaryBlack)'),
     textAlign: 'center',
     padding: '30px',

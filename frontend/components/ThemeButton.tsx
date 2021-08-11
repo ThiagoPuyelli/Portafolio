@@ -22,9 +22,6 @@ export default function ThemeButton () {
       borderRadius: '20px',
       padding: '10px',
       fontSize: '20px',
-      position: 'fixed',
-      top: '20px',
-      right: '20px',
       border: 'none',
       background: 'transparent',
       zIndex: 2

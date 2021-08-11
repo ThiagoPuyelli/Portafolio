@@ -1,3 +1,4 @@
+/*
 import { useFela } from 'react-fela'
 import Image from 'next/image'
 import menuDark from '../public/img/menuLight.svg'
@@ -126,5 +127,55 @@ export default function Menu () {
         </li>
       </ul>
     </div>
+  )
+}*/
+import Link from "next/link"
+import { useFela } from 'react-fela'
+import StoreInterface from '../interfaces/StoreInterface'
+import { useSelector } from 'react-redux'
+import defineTheme from '../utils/defineTheme'
+
+export default function Menu () {
+  const theme = useSelector((state: StoreInterface) => state.theme.theme)
+  const color = useSelector((state: StoreInterface) => state.theme.color)
+    
+  const { css } = useFela()
+  const menuStyle = css({
+    display: 'flex',
+    flexFlow: 'row wrap',
+    justifyContent: 'space-between',
+    width: '300px',
+    color,
+    listStyle: 'none',
+    '> li': {
+      padding: '5px',
+      border: '3px solid ' + defineTheme(theme, 'var(--green3)', 'var(--green1)'),
+      borderTop: 'none !important',
+      height: '10px',
+      marginTop: '20px'
+    },
+    '> li *': {
+      display: 'block',
+      fontWeight: 'bold',
+      fontSize: '18px',
+      marginTop: '-20px !important',
+      ':hover': {
+        transform: 'scale(1.1, 1.1)',
+        color: defineTheme(theme, 'var(--green3)', 'var(--green1) !important'),
+      }
+    }
+  })
+  return (
+    <ul className={menuStyle}>
+      <li>
+        <Link href='/' passHref>Inicio</Link>
+      </li>
+      <li>
+        <Link href='/contact' passHref>Contacto</Link>
+      </li>
+      <li>
+        <Link href='/projects' passHref>Proyectos</Link>
+      </li>
+    </ul>
   )
 }

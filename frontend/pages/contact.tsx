@@ -16,6 +16,8 @@ export default function Contact () {
     flexFlow: 'column wrap',
     alignItems: 'center',
     paddingTop: '50px',
+    boxShadow: 'none !important',
+    borderTop: 'none !important',
     background: defineTheme(theme, 'var(--firstWhite)', 'var(--firstBlack)'),
     color,
     '> .socialLinks': {

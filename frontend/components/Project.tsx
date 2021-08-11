@@ -1,18 +1,30 @@
-import { ProjectInterface } from "../interfaces/ProjectsInterface";
+import { ProjectInterface, TecnologyInterface } from "../interfaces/ProjectsInterface";
 import Image from "next/image"
 import Link from 'next/link'
 import { useFela } from "react-fela";
+import defineTheme from "../utils/defineTheme";
+import { useSelector } from "react-redux";
+import StoreInterface from "../interfaces/StoreInterface";
 
 export default function Project ({ image, title, description, tecnologies, url, github }: ProjectInterface) {
   const { css } = useFela()
+  const theme = useSelector((state: StoreInterface) => state.theme.theme)
+  
   const projectStyle = css({
     textAlign: 'center',
     width: '400px',
     padding: '20px',
     borderRadius: '20px',
-    border: '6px solid black',
-    boxShadow: '0px 0px 4px black',
+    border: '6px solid black !important',
+    boxShadow: '0px 0px 4px black !important',
     margin: '20px',
+    background: 'transparent',
+    '> *': {
+      marginTop: '20px'
+    },
+    '> .titleProject': {
+      marginTop: '0px'
+    },
     '> .imageProject': {
       position: 'relative',
       width: '100%',
@@ -28,7 +40,7 @@ export default function Project ({ image, title, description, tecnologies, url, 
       flexFlow: 'row wrap',
       justifyContent: 'space-between',
       marginBottom: '10px',
-      '> .linkProject': {
+      '> .linkProject *': {
         padding: '5px',
         paddingLeft: '20px',
         paddingRight: '20px',
@@ -38,7 +50,7 @@ export default function Project ({ image, title, description, tecnologies, url, 
         textDecoration: 'underline',
         borderRadius: '15px',
       },
-      '> .linkProject.urlProject': {
+      '> .linkProject.urlProject *': {
         color: 'rgb(19, 81, 250)',
         border: '2px solid rgb(19, 81, 250)',
         backgroundColor: 'rgb(19, 81, 250, 0.2)',
@@ -48,16 +60,21 @@ export default function Project ({ image, title, description, tecnologies, url, 
           boxShadow: '0px 0px 3px rgb(19, 81, 250), 0px 0px 3px inset rgb(19, 81, 250)'
         }
       },
-      '> .linkProject.githubProject': {
-        color: 'var(--firstBlack)',
-        border: '2px solid var(--firstBlack)',
+      '> .linkProject.githubProject *': {
+        color: defineTheme(theme, 'var(--firstBlack)', 'var(--firstWhite)'),
+        border: '2px solid ' + defineTheme(theme, 'var(--firstBlack)', 'var(--firstWhite)'),
         backgroundColor: 'rgb(0, 0, 0, 0.2)',
-        boxShadow: '0px 0px 3px var(--firstBlack)',
+        boxShadow: '0px 0px 3px ' + defineTheme(theme, 'var(--firstBlack)', 'var(--firstWhite)'),
         ':hover': {
-          textShadow: '0px 0px 3px var(--firstBlack)',
-          boxShadow: '0px 0px 3px var(--firstBlack), 0px 0px 3px inset var(--firstBlack)'
+          textShadow: '0px 0px 3px ' + defineTheme(theme, 'var(--firstBlack)', 'var(--firstWhite)'),
+          boxShadow: '0px 0px 3px ' + defineTheme(theme, 'var(--firstBlack)', 'var(--firstWhite)') + ', 0px 0px 3px inset ' + defineTheme(theme, 'var(--firstWhite)', 'var(--firstBlack)')
         }
       }
+    },
+    '> .tecsProject': {
+      display: 'flex',
+      flexFlow: 'row wrap',
+      justifyContent: 'space-between'
     }
   })
 
@@ -73,8 +90,21 @@ export default function Project ({ image, title, description, tecnologies, url, 
         {github && <div className='linkProject githubProject'><Link passHref href={github}><a target='_blank'>Github</a></Link></div> }
       </div>
       <div className="tecsProject">
-        {tecnologies.map((tec: string) => {
-          return <span key={tec} className='tecProject'>{tec}</span>
+        {tecnologies.map((tec: TecnologyInterface) => {
+          return <span 
+            key={tec.tecnology} 
+            className='tecProject'
+            style={{
+              color: tec.color,
+              border: '3px solid ' + tec.color,
+              boxShadow: '0px 0px 3px ' + tec.color,
+              fontWeight: 'bold',
+              borderRadius: '10px',
+              padding: '5px'
+            }}
+            >
+            {tec.tecnology}
+            </span>
         })}
       </div>
     </div>
