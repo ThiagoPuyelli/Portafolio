@@ -5,15 +5,16 @@ import ProjectsInterface from "../interfaces/ProjectsInterface"
 import { env } from "../next.config"
 
 export default function Projects (projects: ProjectsInterface) {
-  console.log(projects)
   
   return (
     <div className="contentProjects">
       <h1>Projects</h1>
-      {projects.projects.map(pro => {
-        const { title, description, image, tics, url, github } = pro
-        return <Project title={title} description={description} image={image} tics={tics} url={url} github={github}  key={pro.title} />
-      })}
+      <div className="projects">
+        {projects.projecs.map(pro => {
+          const { title, description, image, tecnologies, url, github } = pro
+          return <Project title={title} description={description} image={image} tecnologies={tecnologies} url={url} github={github}  key={pro.title} />
+        })}
+      </div>
     </div>
   )
 }

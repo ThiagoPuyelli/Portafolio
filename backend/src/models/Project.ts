@@ -11,13 +11,24 @@ const projectSchema = new Schema<ProjectInterface & Document>({
     required: true
   },
   tecnologies: {
-    type: [String],
+    type: [{
+      tec: {
+        type: String,
+        required: true
+      },
+      color: {
+        type: String,
+        required: true
+      }
+    }],
     required: true
   },
   image: {
     type: String,
     required: true
-  }
+  },
+  url: String,
+  github: String
 })
 
 export default model<ProjectInterface & Document>('Project', projectSchema)
