@@ -5,6 +5,7 @@ import axios from 'axios'
 import { env } from '../next.config'
 import { SkillsInterface, SkillInterface } from '../interfaces/SkillsInterface'
 import StoreInterface from '../interfaces/StoreInterface'
+import styled from '@emotion/styled'
 import { useSelector } from 'react-redux'
 import defineTheme from '../utils/defineTheme'
 
@@ -12,7 +13,7 @@ export default function Home({ skills }: SkillsInterface) {
   const theme = useSelector((state: StoreInterface) => state.theme.theme)
   const color = useSelector((state: StoreInterface) => state.theme.color)
   const { css } = useFela()
-  const contentStyle = css({
+  const ContentStyle = styled.div({
     display: 'flex',
     flexFlow: 'column wrap',
     alignItems: 'center',
@@ -22,18 +23,18 @@ export default function Home({ skills }: SkillsInterface) {
     padding: '30px',
     background: defineTheme(theme, 'var(--firstWhite)', 'var(--firstBlack)'),
     color,
-    '> .about': {
+    '& > .about': {
       display: 'flex',
       flexFlow: 'row wrap',
       justifyContent: 'center',
-      '> div': {
+      '& > div': {
         margin: '10px',
       },
-      '> .text': {
+      '& > .text': {
         width: '400px',
         fontSize: '20px'
       },
-      '> .img': {
+      '& > .img': {
         width: '300px',
         border: '10px solid black',
         borderRadius: '30px',
@@ -41,13 +42,13 @@ export default function Home({ skills }: SkillsInterface) {
         overflow: 'hidden',
         height: '380px'
       },
-      '> .img .htmlImg': {
+      '& > .img .htmlImg': {
         border: '6px solid black',
         width: '100%',
       },
-      '> .text .titleName': {
+      '& > .text .titleName': {
         fontSize: '50px',
-        '> .titleBold': {
+        '& > .titleBold': {
           color: 'var(--green1)',
           fontSize: '80px',
           textShadow: '0px 0px 3px #ccc',
@@ -55,28 +56,28 @@ export default function Home({ skills }: SkillsInterface) {
         }
       },
     },
-    '> .skills': {
+    '& > .skills': {
       display: 'flex',
       flexFlow: 'row wrap',
       justifyContent: 'space-evenly',
       width: '100%',
       padding: '70px',
-      '> .skill': {
+      '& > .skill': {
         width: '320px',
         margin: '20px',
-        '> .skillBox': {
+        '& > .skillBox': {
           display: 'flex',
           flexFlow: 'row wrap',
           alignItems: 'center',
           position: 'relative',
           borderRadius: '20px',
-          '> *': {
+          '& > *': {
             margin: '10px'
           },
-          '> .imgSkill': {
+          '& > .imgSkill': {
             position: 'relative'
           },
-          '> .imgSkill *': {
+          '& > .imgSkill *': {
             width: '80px',
             height: '80px',
             position: 'relative !important'
